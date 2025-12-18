@@ -10,6 +10,7 @@
   "scores": "Puntajes",
   "suggestions": "Sugerencias",
   "error": "Error",
+  "result": "Analisis completo! Aquí tienes tu feedback personalizado",
   "roles": {
     "frontend": "Desarrollador Frontend",
     "backend": "Desarrollador Backend",

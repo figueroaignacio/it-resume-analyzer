@@ -27,24 +27,30 @@ export function RoleSelect({ value, onChange, t }: RoleSelectProps) {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-3">
-      {ROLES.map((role) => {
-        const isActive = value === role;
-        return (
-          <button
-            key={role}
-            type="button"
-            onClick={() => onChange(role)}
-            className={`rounded-lg border p-3 text-sm font-medium transition
+    <div>
+      <label className="mb-3 block text-sm font-semibold text-foreground">
+        Select your target role
+      </label>
+
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        {ROLES.map((role) => {
+          const isActive = value === role;
+          return (
+            <button
+              key={role}
+              type="button"
+              onClick={() => onChange(role)}
+              className={`rounded-lg border-2 px-4 py-3 text-sm font-semibold transition-all
               ${
                 isActive
-                  ? "border-blue-600 bg-blue-50 text-blue-700"
-                  : "border-gray-200 hover:bg-gray-50"
+                  ? "border-primary bg-primary text-primary-foreground shadow-md"
+                  : "border-border bg-background text-foreground hover:border-primary/50 hover:bg-muted/50"
               }`}>
-            {t(`roles.${role}`)}
-          </button>
-        );
-      })}
+              {t(`roles.${role}`)}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

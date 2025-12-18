@@ -9,6 +9,7 @@
   "scores": "Scores",
   "suggestions": "Suggestions",
   "error": "Error",
+  "result": "Analysis complete! Here is your personalized feedback.",
   "roles": {
     "frontend": "Frontend Developer",
     "backend": "Backend Developer",

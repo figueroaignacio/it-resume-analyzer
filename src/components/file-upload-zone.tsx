@@ -1,3 +1,7 @@
+"use client";
+
+import type React from "react";
+
 import { FileText, Upload, X } from "lucide-react";
 
 interface FileUploadZoneProps {
@@ -23,8 +27,8 @@ export function FileUploadZone({
 }: FileUploadZoneProps) {
   return (
     <div>
-      <label className="mb-3 block text-center text-sm font-medium">
-        Upload your resume (PDF or DOCX)
+      <label className="mb-3 block text-sm font-semibold text-foreground">
+        Upload your resume
       </label>
 
       <div
@@ -37,10 +41,10 @@ export function FileUploadZone({
           transition-all duration-200 ease-in-out
           ${
             isDragging
-              ? "border-blue-500 bg-blue-50"
+              ? "border-primary bg-primary/5 shadow-md"
               : file
-              ? "border-green-400 bg-green-50"
-              : "border-gray-300 bg-gray-50 hover:border-blue-400 hover:bg-blue-50"
+              ? "border-primary/50 bg-primary/5"
+              : "border-border bg-muted/30 hover:border-primary/50 hover:bg-muted/50"
           }
           ${loading ? "pointer-events-none opacity-60" : ""}
         `}>
@@ -54,25 +58,38 @@ export function FileUploadZone({
         />
 
         {!file ? (
-          <div className="flex flex-col items-center justify-center px-6 py-12">
-            <Upload
-              className={`mb-4 h-12 w-12 ${
-                isDragging ? "text-blue-500" : "text-gray-400"
-              }`}
-            />
-            <p className="mb-1 text-sm font-medium text-gray-700">
-              {isDragging ? "Drop the file here!" : "Drag your resume here"}
+          <div className="flex flex-col items-center justify-center px-6 py-16">
+            <div
+              className={`mb-4 flex h-16 w-16 items-center justify-center rounded-full transition-colors ${
+                isDragging ? "bg-primary/10" : "bg-muted"
+              }`}>
+              <Upload
+                className={`h-8 w-8 ${
+                  isDragging ? "text-primary" : "text-muted-foreground"
+                }`}
+              />
+            </div>
+            <p className="mb-2 text-base font-semibold text-foreground">
+              {isDragging ? "Drop your file here" : "Drag and drop your resume"}
             </p>
-            <p className="text-xs text-gray-500">or click to select a file</p>
-            <p className="mt-2 text-xs text-gray-400">PDF or DOCX • Max 10MB</p>
+            <p className="mb-1 text-sm text-muted-foreground">
+              or click to browse files
+            </p>
+            <p className="mt-3 rounded-full bg-muted px-3 py-1 text-xs text-muted-foreground">
+              PDF or DOCX • Max 10MB
+            </p>
           </div>
         ) : (
           <div className="flex items-center justify-between px-6 py-8">
-            <div className="flex items-center gap-3">
-              <FileText className="h-10 w-10 text-green-600" />
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                <FileText className="h-6 w-6 text-primary" />
+              </div>
               <div>
-                <p className="text-sm font-medium text-gray-900">{file.name}</p>
-                <p className="text-xs text-gray-500">
+                <p className="text-sm font-semibold text-foreground">
+                  {file.name}
+                </p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
                   {(file.size / 1024).toFixed(1)} KB
                 </p>
               </div>
@@ -84,7 +101,7 @@ export function FileUploadZone({
                 e.stopPropagation();
                 onRemove();
               }}
-              className="rounded-full p-2 text-gray-400 transition-colors hover:bg-red-50 hover:text-red-600"
+              className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
               disabled={loading}>
               <X className="h-5 w-5" />
             </button>

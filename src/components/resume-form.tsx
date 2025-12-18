@@ -1,7 +1,10 @@
 "use client";
 
+import type React from "react";
+
 import { useFileUpload } from "@/hooks/use-file-upload";
 import { useResumeAnalysis } from "@/hooks/use-resume-analysis";
+import { Loader2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { FileUploadZone } from "./file-upload-zone";
@@ -49,8 +52,12 @@ export function ResumeForm({ onResult }: ResumeFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {error && (
-        <div className="rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-800">
-          <strong>{t("error")}:</strong> {error}
+        <div className="flex items-start gap-3 rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
+          <span className="font-semibold">⚠</span>
+          <div>
+            <strong className="font-semibold">{t("error")}:</strong>{" "}
+            <span>{error}</span>
+          </div>
         </div>
       )}
 
@@ -77,8 +84,15 @@ export function ResumeForm({ onResult }: ResumeFormProps) {
       <button
         type="submit"
         disabled={loading || !fileUpload.file || !role}
-        className="w-full rounded-xl bg-blue-600 py-3 font-medium text-white transition-all hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50">
-        {loading ? t("analyzing") : t("analyze")}
+        className="group relative w-full overflow-hidden rounded-xl bg-primary py-4 font-semibold text-primary-foreground shadow-lg transition-all hover:bg-primary/90 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-primary disabled:hover:shadow-lg">
+        {loading ? (
+          <span className="flex items-center justify-center gap-2">
+            <Loader2 className="h-5 w-5 animate-spin" />
+            {t("analyzing")}
+          </span>
+        ) : (
+          <span>{t("analyze")}</span>
+        )}
       </button>
     </form>
   );

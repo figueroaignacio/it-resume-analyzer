@@ -1,3 +1,8 @@
 {
-  "home": "Hello"
+  "title": "IT Resume Analyzer",
+  "subtitle": "AI-powered resume analysis for IT professionals",
+  "upload": "Upload your resume",
+  "analyze": "Analyze resume",
+  "scores": "Scores",
+  "suggestions": "Suggestions"
 }

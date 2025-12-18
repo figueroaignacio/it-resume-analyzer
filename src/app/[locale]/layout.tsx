@@ -1,3 +1,5 @@
+import { NextIntlClientProvider } from "next-intl";
+
 // Fonts
 import { geistSans } from "@/lib/fonts";
 
@@ -10,14 +12,16 @@ export const metadata: Metadata = {
     "Analyze, improve and optimize your IT resume for ATS and real recruiters",
 };
 
-export default function RootLayout({
+export default function LocaleLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable}`}>
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+      </body>
     </html>
   );
 }

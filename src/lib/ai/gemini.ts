@@ -1,0 +1,19 @@
+import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+});
+
+export async function generateWithGemini(prompt: string) {
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
+    });
+
+    return response.candidates?.[0]?.content?.parts?.[0]?.text || "";
+  } catch (error) {
+    console.error("Error en Gemini SDK:", error);
+    throw error;
+  }
+}

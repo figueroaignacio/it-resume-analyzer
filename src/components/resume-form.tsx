@@ -1,63 +1,84 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useFileUpload } from "@/hooks/use-file-upload";
+import { useResumeAnalysis } from "@/hooks/use-resume-analysis";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
+import { FileUploadZone } from "./file-upload-zone";
 import { RoleSelect } from "./role-select";
 
-export function ResumeForm({ onResult }: { onResult: (data: any) => void }) {
-  const locale = useLocale(); // ⬅️ Obtener locale
-  const [file, setFile] = useState<File | null>(null);
-  const [role, setRole] = useState("");
-  const [loading, setLoading] = useState(false);
+interface ResumeFormProps {
+  onResult: (data: any) => void;
+}
 
-  async function handleSubmit(e: React.FormEvent) {
+export function ResumeForm({ onResult }: ResumeFormProps) {
+  const t = useTranslations("");
+  const locale = useLocale();
+  const { analyzeResume, loading, error, clearError } = useResumeAnalysis();
+
+  const [role, setRole] = useState<
+    | ""
+    | "frontend"
+    | "backend"
+    | "fullstack"
+    | "qa"
+    | "data"
+    | "devops"
+    | "mobile"
+  >("");
+
+  const fileUpload = useFileUpload({ maxSizeMB: 10, onError: clearError });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!file || !role) return;
+    if (!fileUpload.file || !role) return;
 
-    setLoading(true);
+    const result = await analyzeResume({
+      file: fileUpload.file,
+      role,
+      locale: locale,
+    });
 
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("role", role);
-      formData.append("locale", locale); // ⬅️ Enviar locale al API
-
-      const res = await fetch("/api/resume/analyze", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || "Error en el servidor");
-      }
-
-      const data = await res.json();
-      onResult(data);
-    } catch (error) {
-      console.error("Error al enviar:", error);
-      alert("Hubo un error al analizar el CV. Revisa la consola.");
-    } finally {
-      setLoading(false);
+    if (result) {
+      onResult(result);
+      fileUpload.reset();
+      setRole("");
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <input
-        type="file"
-        accept=".pdf,.docx"
-        onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-        className="w-full rounded-lg border p-3 text-sm"
+      {error && (
+        <div className="rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-800">
+          <strong>{t("error")}:</strong> {error}
+        </div>
+      )}
+
+      <FileUploadZone
+        file={fileUpload.file}
+        isDragging={fileUpload.isDragging}
+        loading={loading}
+        onDragOver={fileUpload.handleDragOver}
+        onDragLeave={fileUpload.handleDragLeave}
+        onDrop={fileUpload.handleDrop}
+        onFileInput={fileUpload.handleFileInput}
+        onRemove={fileUpload.removeFile}
       />
 
-      <RoleSelect value={role} onChange={setRole} />
+      <RoleSelect
+        value={role}
+        onChange={(v) => {
+          setRole(v);
+          clearError();
+        }}
+        t={t}
+      />
 
       <button
         type="submit"
-        disabled={loading}
-        className="w-full rounded-xl bg-blue-600 py-3 text-white disabled:opacity-50">
-        {loading ? "Analyzing…" : "Analyze Resume"}
+        disabled={loading || !fileUpload.file || !role}
+        className="w-full rounded-xl bg-blue-600 py-3 font-medium text-white transition-all hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50">
+        {loading ? t("analyzing") : t("analyze")}
       </button>
     </form>
   );

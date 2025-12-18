@@ -1,36 +1,50 @@
-const ROLES = [
-  { id: "frontend", label: "Frontend Developer" },
-  { id: "backend", label: "Backend Developer" },
-  { id: "fullstack", label: "Fullstack Developer" },
-  { id: "qa", label: "QA Engineer" },
-  { id: "data", label: "Data Analyst / Engineer" },
-  { id: "devops", label: "DevOps / Platform Engineer" },
-  { id: "mobile", label: "Mobile Developer" },
-];
+"use client";
 
-export function RoleSelect({
-  value,
-  onChange,
-}: {
-  value: string;
-  onChange: (v: string) => void;
-}) {
+type RoleId =
+  | "frontend"
+  | "backend"
+  | "fullstack"
+  | "qa"
+  | "data"
+  | "devops"
+  | "mobile";
+
+interface RoleSelectProps {
+  value: RoleId | "";
+  onChange: (value: RoleId) => void;
+  t: (key: string) => string;
+}
+
+export function RoleSelect({ value, onChange, t }: RoleSelectProps) {
+  const ROLES: RoleId[] = [
+    "frontend",
+    "backend",
+    "fullstack",
+    "qa",
+    "data",
+    "devops",
+    "mobile",
+  ];
+
   return (
     <div className="grid grid-cols-2 gap-3">
-      {ROLES.map((role) => (
-        <button
-          key={role.id}
-          type="button"
-          onClick={() => onChange(role.id)}
-          className={`rounded-lg border p-3 text-sm transition
-            ${
-              value === role.id
-                ? "border-blue-600 bg-blue-50"
-                : "border-gray-200 hover:bg-gray-50"
-            }`}>
-          {role.label}
-        </button>
-      ))}
+      {ROLES.map((role) => {
+        const isActive = value === role;
+        return (
+          <button
+            key={role}
+            type="button"
+            onClick={() => onChange(role)}
+            className={`rounded-lg border p-3 text-sm font-medium transition
+              ${
+                isActive
+                  ? "border-blue-600 bg-blue-50 text-blue-700"
+                  : "border-gray-200 hover:bg-gray-50"
+              }`}>
+            {t(`roles.${role}`)}
+          </button>
+        );
+      })}
     </div>
   );
 }

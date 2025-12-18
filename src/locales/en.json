@@ -1,8 +1,21 @@
 {
-  "title": "IT Resume Analyzer",
-  "subtitle": "AI-powered resume analysis for IT professionals",
+  "hero": {
+    "title": "IT Resume Analyzer",
+    "subtitle": "Analyze, improve and optimize your IT resume for ATS and real recruiters"
+  },
   "upload": "Upload your resume",
-  "analyze": "Analyze resume",
+  "analyze": "Analyze Resume",
+  "analyzing": "Analyzing...",
   "scores": "Scores",
-  "suggestions": "Suggestions"
+  "suggestions": "Suggestions",
+  "error": "Error",
+  "roles": {
+    "frontend": "Frontend Developer",
+    "backend": "Backend Developer",
+    "fullstack": "Fullstack Developer",
+    "qa": "QA Engineer",
+    "data": "Data Analyst / Engineer",
+    "devops": "DevOps / Platform Engineer",
+    "mobile": "Mobile Developer"
+  }
 }

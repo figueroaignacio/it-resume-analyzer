@@ -1,8 +1,22 @@
 {
-  "title": "Analizador de CV IT",
-  "subtitle": "Análisis de CV con IA para perfiles tecnológicos",
+  "hero": {
+    "title": "Analizador de CV IT",
+    "subtitle": "Analiza, mejora y optimiza tu CV de IT para ATS y reclutadores reales"
+  },
+
   "upload": "Subí tu currículum",
   "analyze": "Analizar CV",
+  "analyzing": "Analizando...",
   "scores": "Puntajes",
-  "suggestions": "Sugerencias"
+  "suggestions": "Sugerencias",
+  "error": "Error",
+  "roles": {
+    "frontend": "Desarrollador Frontend",
+    "backend": "Desarrollador Backend",
+    "fullstack": "Desarrollador Fullstack",
+    "qa": "Ingeniero QA",
+    "data": "Analista / Ingeniero de Datos",
+    "devops": "DevOps / Ingeniero de Plataforma",
+    "mobile": "Desarrollador Móvil"
+  }
 }

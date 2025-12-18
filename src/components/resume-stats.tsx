@@ -9,7 +9,6 @@ export function ResumeStats({ scores }: { scores: Record<string, number> }) {
           <div
             key={key}
             className="flex justify-between border-b border-gray-50 pb-1">
-            {/* Reemplazamos camelCase por espacios para que se vea bien */}
             <span className="capitalize">{key.replace(/([A-Z])/g, " $1")}</span>
             <span className="font-medium text-blue-600">{value}%</span>
           </div>

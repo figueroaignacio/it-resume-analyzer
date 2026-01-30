@@ -11,6 +11,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
 
 interface ResumeResultsProps {
   result: any;
@@ -23,6 +24,7 @@ export function ResumeResults({
   onNewAnalysis,
   isTransitioning,
 }: ResumeResultsProps) {
+  const t = useTranslations("results");
   const scores = result?.scores || {};
   const suggestions = result?.suggestions || [];
 
@@ -66,17 +68,16 @@ export function ResumeResults({
   };
 
   const getScoreLabel = (score: number) => {
-    if (score >= 80) return "Excellent";
-    if (score >= 60) return "Good";
-    if (score >= 40) return "Fair";
-    return "Needs Work";
+    if (score >= 80) return t("scoreLabels.excellent");
+    if (score >= 60) return t("scoreLabels.good");
+    if (score >= 40) return t("scoreLabels.fair");
+    return t("scoreLabels.needsWork");
   };
 
   const avgColors = getScoreColor(averageScore);
 
   return (
     <div className="space-y-6">
-      {/* Back Button */}
       <motion.button
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -85,10 +86,8 @@ export function ResumeResults({
         disabled={isTransitioning}
         className="group flex items-center gap-2 text-sm font-medium text-violet-200/70 transition-all hover:text-violet-200 disabled:opacity-50">
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-        Analyze another resume
+        {t("backButton")}
       </motion.button>
-
-      {/* Success Banner */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -101,16 +100,12 @@ export function ResumeResults({
           </div>
           <div>
             <h3 className="text-lg font-semibold text-white">
-              Analysis Complete!
+              {t("successTitle")}
             </h3>
-            <p className="text-sm text-violet-200/70">
-              Your resume has been analyzed. Here are your results.
-            </p>
+            <p className="text-sm text-violet-200/70">{t("successMessage")}</p>
           </div>
         </div>
       </motion.div>
-
-      {/* Overall Score Card */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -122,7 +117,7 @@ export function ResumeResults({
             <Award className="h-8 w-8 text-violet-200" />
           </div>
           <h3 className="mb-2 text-sm font-medium uppercase tracking-wider text-violet-200/70">
-            Overall Score
+            {t("overallScore")}
           </h3>
           <div className="mb-2 text-6xl font-bold text-white">
             {averageScore}
@@ -135,8 +130,6 @@ export function ResumeResults({
           </div>
         </div>
       </motion.div>
-
-      {/* Detailed Scores */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -149,13 +142,14 @@ export function ResumeResults({
             </div>
             <div>
               <h3 className="text-lg font-semibold text-white">
-                Detailed Scores
+                {t("detailedScores")}
               </h3>
-              <p className="text-sm text-violet-200/60">Category breakdown</p>
+              <p className="text-sm text-violet-200/60">
+                {t("categoryBreakdown")}
+              </p>
             </div>
           </div>
         </div>
-
         <div className="p-6">
           <div className="space-y-4">
             {scoreEntries.map(([key, value], index) => {
@@ -207,8 +201,6 @@ export function ResumeResults({
           </div>
         </div>
       </motion.div>
-
-      {/* Suggestions */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -221,15 +213,14 @@ export function ResumeResults({
             </div>
             <div>
               <h3 className="text-lg font-semibold text-white">
-                Improvement Suggestions
+                {t("improvementSuggestions")}
               </h3>
               <p className="text-sm text-violet-200/60">
-                {suggestions.length} actionable tips
+                {suggestions.length} {t("actionableTips")}
               </p>
             </div>
           </div>
         </div>
-
         <div className="p-6">
           <div className="space-y-3">
             {suggestions.map((suggestion: string, index: number) => (
@@ -250,8 +241,6 @@ export function ResumeResults({
           </div>
         </div>
       </motion.div>
-
-      {/* Action Button */}
       <motion.button
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -261,7 +250,7 @@ export function ResumeResults({
         className="group relative w-full overflow-hidden rounded-xl border border-violet-500/30 bg-linear-to-r from-violet-600 to-fuchsia-600 py-4 font-semibold text-white shadow-lg shadow-violet-500/25 transition-all hover:shadow-xl hover:shadow-violet-500/40 disabled:opacity-50">
         <span className="relative z-10 flex items-center justify-center gap-2">
           <FileText className="h-5 w-5" />
-          Analyze Another Resume
+          {t("analyzeAnother")}
         </span>
         <div className="absolute inset-0 bg-linear-to-r from-fuchsia-600 to-violet-600 opacity-0 transition-opacity group-hover:opacity-100" />
       </motion.button>

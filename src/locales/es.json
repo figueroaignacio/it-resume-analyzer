@@ -3,14 +3,12 @@
     "title": "Analizador de CV IT",
     "subtitle": "Analiza, mejora y optimiza tu CV de IT para ATS y reclutadores reales"
   },
-
-  "upload": "Subí tu currículum",
   "analyze": "Analizar CV",
   "analyzing": "Analizando...",
   "scores": "Puntajes",
   "suggestions": "Sugerencias",
   "error": "Error",
-  "result": "Analisis completo! Aquí tienes tu feedback personalizado",
+  "result": "Análisis completo! Aquí tenés tu feedback personalizado",
   "roles": {
     "frontend": "Desarrollador Frontend",
     "backend": "Desarrollador Backend",
@@ -19,5 +17,60 @@
     "data": "Analista / Ingeniero de Datos",
     "devops": "DevOps / Ingeniero de Plataforma",
     "mobile": "Desarrollador Móvil"
+  },
+  "form": {
+    "badge": "Comenzá tu Análisis",
+    "title": "Subir y Analizar",
+    "subtitle": "Obtené feedback instantáneo sobre tu CV en 2 simples pasos",
+    "step1": "Subí tu Currículum",
+    "step2": "Seleccioná el Rol Objetivo",
+    "submitValid": "Analizar CV",
+    "submitInvalid": "Completá los Pasos de Arriba",
+    "analyzing": "Analizando tu CV...",
+    "processingMessage": "Procesando tu currículum con IA..."
+  },
+  "upload": {
+    "dragDrop": "Arrastrá y soltá tu CV",
+    "dropHere": "Soltá tu archivo acá",
+    "orClick": "o hacé clic para buscar archivos",
+    "fileInfo": "PDF o DOCX • Máx 10MB",
+    "readyToAnalyze": "Listo para analizar"
+  },
+  "results": {
+    "backButton": "Analizar otro currículum",
+    "successTitle": "¡Análisis Completo!",
+    "successMessage": "Tu currículum fue analizado. Acá están tus resultados.",
+    "overallScore": "Puntaje General",
+    "detailedScores": "Puntajes Detallados",
+    "categoryBreakdown": "Desglose por categoría",
+    "improvementSuggestions": "Sugerencias de Mejora",
+    "actionableTips": "consejos accionables",
+    "analyzeAnother": "Analizar Otro Currículum",
+    "scoreLabels": {
+      "excellent": "Excelente",
+      "good": "Bueno",
+      "fair": "Regular",
+      "needsWork": "Necesita Mejorar"
+    }
+  },
+  "features": {
+    "instantAnalysis": {
+      "title": "Análisis Instantáneo",
+      "description": "Obtené feedback completo sobre tu CV en segundos con IA avanzada"
+    },
+    "roleSpecific": {
+      "title": "Específico por Rol",
+      "description": "Insights personalizados para tu rol objetivo y objetivos de carrera"
+    },
+    "actionableTips": {
+      "title": "Consejos Accionables",
+      "description": "Recibí sugerencias concretas para mejorar y optimizar tu currículum"
+    }
+  },
+  "badges": {
+    "aiPowered": "Análisis de CV con IA",
+    "instantAnalysis": "Análisis Instantáneo",
+    "atsOptimized": "Optimizado para ATS",
+    "roleSpecific": "Específico por Rol"
   }
 }

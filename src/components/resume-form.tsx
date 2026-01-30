@@ -1,11 +1,10 @@
 "use client";
 
-import type React from "react";
-
 import { useFileUpload } from "@/hooks/use-file-upload";
 import { useResumeAnalysis } from "@/hooks/use-resume-analysis";
 import { Loader2, Sparkles } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import type React from "react";
 import { useState } from "react";
 import { FileUploadZone } from "./file-upload-zone";
 import { RoleSelect } from "./role-select";
@@ -53,19 +52,14 @@ export function ResumeForm({ onResult }: ResumeFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
-      {/* Header */}
       <div className="text-center">
         <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-violet-500/10 px-4 py-1.5 text-sm font-medium text-violet-300">
           <Sparkles className="h-3.5 w-3.5" />
-          Start Your Analysis
+          {t("form.badge")}
         </div>
-        <h2 className="text-2xl font-bold text-white">Upload & Analyze</h2>
-        <p className="mt-2 text-sm text-violet-200/60">
-          Get instant feedback on your resume in 2 simple steps
-        </p>
+        <h2 className="text-2xl font-bold text-white">{t("form.title")}</h2>
+        <p className="mt-2 text-sm text-violet-200/60">{t("form.subtitle")}</p>
       </div>
-
-      {/* Error Message */}
       {error && (
         <div className="animate-shake rounded-xl border border-red-500/30 bg-red-950/30 p-4 backdrop-blur-sm">
           <div className="flex items-start gap-3">
@@ -73,24 +67,21 @@ export function ResumeForm({ onResult }: ResumeFormProps) {
               ⚠
             </div>
             <div className="flex-1">
-              <p className="text-sm font-medium text-red-200">Error</p>
+              <p className="text-sm font-medium text-red-200">{t("error")}</p>
               <p className="mt-1 text-sm text-red-200/80">{error}</p>
             </div>
           </div>
         </div>
       )}
-
-      {/* Step 1: Upload */}
       <div className="space-y-3">
         <div className="flex items-center gap-2">
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-violet-500/20 text-sm font-bold text-violet-300">
             1
           </div>
           <h3 className="text-sm font-semibold text-violet-100">
-            Upload Your Resume
+            {t("form.step1")}
           </h3>
         </div>
-
         <FileUploadZone
           file={fileUpload.file}
           isDragging={fileUpload.isDragging}
@@ -102,18 +93,15 @@ export function ResumeForm({ onResult }: ResumeFormProps) {
           onRemove={fileUpload.removeFile}
         />
       </div>
-
-      {/* Step 2: Role */}
       <div className="space-y-3">
         <div className="flex items-center gap-2">
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-fuchsia-500/20 text-sm font-bold text-fuchsia-300">
             2
           </div>
           <h3 className="text-sm font-semibold text-violet-100">
-            Select Target Role
+            {t("form.step2")}
           </h3>
         </div>
-
         <RoleSelect
           value={role}
           onChange={(v) => {
@@ -123,35 +111,31 @@ export function ResumeForm({ onResult }: ResumeFormProps) {
           t={t}
         />
       </div>
-
-      {/* Submit Button */}
       <button
         type="submit"
         disabled={loading || !isFormValid}
-        className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 py-4 font-semibold text-white shadow-lg shadow-violet-500/25 transition-all hover:shadow-xl hover:shadow-violet-500/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:shadow-lg disabled:hover:shadow-violet-500/25">
-        <div className="absolute inset-0 bg-gradient-to-r from-fuchsia-600 to-violet-600 opacity-0 transition-opacity group-hover:opacity-100" />
+        className="group relative w-full overflow-hidden rounded-xl bg-linear-to-r from-violet-600 to-fuchsia-600 py-4 font-semibold text-white shadow-lg shadow-violet-500/25 transition-all hover:shadow-xl hover:shadow-violet-500/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:shadow-lg disabled:hover:shadow-violet-500/25">
+        <div className="absolute inset-0 bg-linear-to-r from-fuchsia-600 to-violet-600 opacity-0 transition-opacity group-hover:opacity-100" />
 
         {loading ? (
           <span className="relative z-10 flex items-center justify-center gap-2">
             <Loader2 className="h-5 w-5 animate-spin" />
-            Analyzing Your Resume...
+            {t("form.analyzing")}
           </span>
         ) : (
           <span className="relative z-10 flex items-center justify-center gap-2">
             <Sparkles className="h-5 w-5" />
-            {isFormValid ? "Analyze Resume" : "Complete Steps Above"}
+            {isFormValid ? t("form.submitValid") : t("form.submitInvalid")}
           </span>
         )}
       </button>
-
-      {/* Progress Indicator */}
       {loading && (
         <div className="space-y-2">
           <div className="h-1 overflow-hidden rounded-full bg-violet-950/50">
-            <div className="h-full w-full origin-left animate-progress bg-gradient-to-r from-violet-500 via-fuchsia-500 to-violet-500" />
+            <div className="h-full w-full origin-left animate-progress bg-linear-to-r from-violet-500 via-fuchsia-500 to-violet-500" />
           </div>
           <p className="text-center text-xs text-violet-200/60">
-            Processing your resume with AI...
+            {t("form.processingMessage")}
           </p>
         </div>
       )}

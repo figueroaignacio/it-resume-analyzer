@@ -27,8 +27,8 @@ export function ResumeApp() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4, ease: "easeOut" }}>
-            <div className="relative overflow-hidden rounded-3xl border border-violet-500/20 bg-gradient-to-br from-violet-950/40 via-fuchsia-950/20 to-transparent p-1 shadow-2xl shadow-violet-500/10 backdrop-blur-xl">
-              <div className="rounded-[22px] bg-[#0A0118]/80 p-8 backdrop-blur-sm md:p-10">
+            <div className="relative overflow-hidden rounded-3xl border border-violet-500/20  to-transparent p-1 shadow-2xl shadow-violet-500/10 backdrop-blur-xl">
+              <div className="rounded-[22px]  p-8 backdrop-blur-sm md:p-10">
                 <ResumeForm onResult={setResult} />
               </div>
             </div>

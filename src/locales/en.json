@@ -3,7 +3,6 @@
     "title": "IT Resume Analyzer",
     "subtitle": "Analyze, improve and optimize your IT resume for ATS and real recruiters"
   },
-  "upload": "Upload your resume",
   "analyze": "Analyze Resume",
   "analyzing": "Analyzing...",
   "scores": "Scores",
@@ -18,5 +17,60 @@
     "data": "Data Analyst / Engineer",
     "devops": "DevOps / Platform Engineer",
     "mobile": "Mobile Developer"
+  },
+  "form": {
+    "badge": "Start Your Analysis",
+    "title": "Upload & Analyze",
+    "subtitle": "Get instant feedback on your resume in 2 simple steps",
+    "step1": "Upload Your Resume",
+    "step2": "Select Target Role",
+    "submitValid": "Analyze Resume",
+    "submitInvalid": "Complete Steps Above",
+    "analyzing": "Analyzing Your Resume...",
+    "processingMessage": "Processing your resume with AI..."
+  },
+  "upload": {
+    "dragDrop": "Drag & drop your resume",
+    "dropHere": "Drop your file here",
+    "orClick": "or click to browse files",
+    "fileInfo": "PDF or DOCX • Max 10MB",
+    "readyToAnalyze": "Ready to analyze"
+  },
+  "results": {
+    "backButton": "Analyze another resume",
+    "successTitle": "Analysis Complete!",
+    "successMessage": "Your resume has been analyzed. Here are your results.",
+    "overallScore": "Overall Score",
+    "detailedScores": "Detailed Scores",
+    "categoryBreakdown": "Category breakdown",
+    "improvementSuggestions": "Improvement Suggestions",
+    "actionableTips": "actionable tips",
+    "analyzeAnother": "Analyze Another Resume",
+    "scoreLabels": {
+      "excellent": "Excellent",
+      "good": "Good",
+      "fair": "Fair",
+      "needsWork": "Needs Work"
+    }
+  },
+  "features": {
+    "instantAnalysis": {
+      "title": "Instant Analysis",
+      "description": "Get comprehensive feedback on your resume in seconds with advanced AI"
+    },
+    "roleSpecific": {
+      "title": "Role-Specific",
+      "description": "Tailored insights for your target developer role and career goals"
+    },
+    "actionableTips": {
+      "title": "Actionable Tips",
+      "description": "Receive concrete suggestions to improve and optimize your resume"
+    }
+  },
+  "badges": {
+    "aiPowered": "AI-Powered Resume Analysis",
+    "instantAnalysis": "Instant Analysis",
+    "atsOptimized": "ATS Optimized",
+    "roleSpecific": "Role-Specific"
   }
 }

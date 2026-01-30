@@ -1,8 +1,8 @@
 "use client";
 
-import type React from "react";
-
 import { CheckCircle2, FileText, Upload, X } from "lucide-react";
+import { useTranslations } from "next-intl";
+import type React from "react";
 
 interface FileUploadZoneProps {
   file: File | null;
@@ -25,6 +25,8 @@ export function FileUploadZone({
   onFileInput,
   onRemove,
 }: FileUploadZoneProps) {
+  const t = useTranslations("upload");
+
   return (
     <div>
       <div
@@ -67,27 +69,21 @@ export function FileUploadZone({
                 }`}
               />
             </div>
-
             <p className="mb-2 text-base font-semibold text-white">
-              {isDragging ? "Drop your file here" : "Drag & drop your resume"}
+              {isDragging ? t("dropHere") : t("dragDrop")}
             </p>
-            <p className="mb-1 text-sm text-violet-200/60">
-              or click to browse files
-            </p>
-
+            <p className="mb-1 text-sm text-violet-200/60">{t("orClick")}</p>
             <div className="mt-4 flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-950/30 px-4 py-1.5 text-xs text-violet-300">
               <div className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-              PDF or DOCX • Max 10MB
+              {t("fileInfo")}
             </div>
           </div>
         ) : (
           <div className="group relative overflow-hidden">
-            {/* Success background effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-violet-500/5 to-fuchsia-500/5" />
-
+            <div className="absolute inset-0 bg-linear-to-r from-violet-500/5 to-fuchsia-500/5" />
             <div className="relative flex items-center justify-between p-6">
               <div className="flex items-center gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20 shadow-lg">
+                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-linear-to-br from-violet-500/20 to-fuchsia-500/20 shadow-lg">
                   <FileText className="h-7 w-7 text-violet-300" />
                 </div>
                 <div>
@@ -98,11 +94,12 @@ export function FileUploadZone({
                   <div className="flex items-center gap-3 text-xs text-violet-200/60">
                     <span>{(file.size / 1024).toFixed(1)} KB</span>
                     <span>•</span>
-                    <span className="text-emerald-400">Ready to analyze</span>
+                    <span className="text-emerald-400">
+                      {t("readyToAnalyze")}
+                    </span>
                   </div>
                 </div>
               </div>
-
               <button
                 type="button"
                 onClick={(e) => {
@@ -116,8 +113,6 @@ export function FileUploadZone({
             </div>
           </div>
         )}
-
-        {/* Animated border gradient */}
         {isDragging && (
           <div className="absolute inset-0 animate-pulse rounded-xl border-2 border-violet-400/50" />
         )}

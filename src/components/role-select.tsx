@@ -96,7 +96,7 @@ export function RoleSelect({ value, onChange, t }: RoleSelectProps) {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
       {ROLES.map((role, index) => {
         const isActive = value === role;
         const Icon = ROLE_ICONS[role];
@@ -119,13 +119,11 @@ export function RoleSelect({ value, onChange, t }: RoleSelectProps) {
                   : `border-violet-500/20 bg-violet-950/10 ${colors.hover}`
               }
             `}>
-            {/* Background glow effect */}
             {isActive && (
               <div
                 className={`absolute inset-0 ${colors.bg} opacity-50 blur-xl`}
               />
             )}
-
             <div className="relative flex items-center gap-3">
               <div
                 className={`
@@ -135,7 +133,6 @@ export function RoleSelect({ value, onChange, t }: RoleSelectProps) {
                 `}>
                 <Icon className="h-5 w-5" />
               </div>
-
               <div className="flex-1 min-w-0">
                 <p
                   className={`
@@ -147,8 +144,6 @@ export function RoleSelect({ value, onChange, t }: RoleSelectProps) {
                 </p>
               </div>
             </div>
-
-            {/* Active indicator */}
             {isActive && (
               <motion.div
                 layoutId="activeRole"

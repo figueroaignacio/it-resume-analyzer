@@ -3,27 +3,26 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: oklch(99.405% 0.00011 271.152);
-  --foreground: oklch(0% 0 0);
-  --card: oklch(99.405% 0.00011 271.152);
-  --card-foreground: oklch(0% 0 0);
-  --popover: oklch(99.107% 0.00011 271.152);
-  --popover-foreground: oklch(0% 0 0);
-  --primary: oklch(53.934% 0.2714 286.753);
-  --primary-foreground: oklch(100% 0.00011 271.152);
-  --secondary: oklch(95.4% 0.00637 255.746);
-  --secondary-foreground: oklch(13.441% 0.00002 271.152);
-  --muted: oklch(97.015% 0.00011 271.152);
-  --muted-foreground: oklch(43.861% 0.00005 271.152);
-  --accent: oklch(93.929% 0.02887 266.393);
-  --accent-foreground: oklch(54.456% 0.19041 259.501);
-  --destructive: oklch(62.902% 0.19024 23.052);
-  --destructive-foreground: oklch(100% 0.00011 271.152);
-  --border: oklch(88.09% 0.00941 258.48);
-  --input: oklch(93.1% 0.00011 271.152);
-  --ring: oklch(0% 0 0);
-  --radius: 0.625rem;
-  --grid-color: oklch(0% 0 0 / 0.04);
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #1e1f20;
+  --card-foreground: #ffffff;
+  --popover: #1e1f20;
+  --popover-foreground: #ffffff;
+  --primary: #1e1f20;
+  --primary-foreground: #ffffff;
+  --secondary: #2a2b2c;
+  --secondary-foreground: #e5e5e5;
+  --muted: #1a1a1a;
+  --muted-foreground: #a0a0a0;
+  --accent: #2a2b2c;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #2a2b2c;
+  --input: #1e1f20;
+  --ring: #3a3b3c;
+  --radius: 0.5rem;
 }
 
 @theme inline {
@@ -59,26 +58,26 @@
   }
 
   body::-webkit-scrollbar-track {
-    background: rgba(10, 1, 24, 0.5);
+    background: #000000;
   }
 
   body::-webkit-scrollbar-thumb {
-    background: rgba(139, 92, 246, 0.3);
+    background: #2a2b2c;
     border-radius: 3px;
   }
 
   body::-webkit-scrollbar-thumb:hover {
-    background: rgba(139, 92, 246, 0.5);
+    background: #3a3b3c;
   }
 
   * {
     scrollbar-width: thin;
-    scrollbar-color: rgba(139, 92, 246, 0.3) rgba(10, 1, 24, 0.5);
+    scrollbar-color: #2a2b2c #000000;
     @apply border-border scroll-smooth;
   }
 
   body {
-    @apply bg-[#0A0118] text-white tracking-normal antialiased;
+    @apply bg-[#000000] text-white tracking-normal antialiased;
   }
 
   h1,
@@ -87,8 +86,8 @@
   h4,
   h5,
   h6 {
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
 }
 
@@ -101,36 +100,6 @@
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-20px) scale(1.05);
-  }
-}
-
-@keyframes float-delayed {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-25px) scale(1.03);
-  }
-}
-
-@keyframes float-slow {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-15px) scale(1.02);
   }
 }
 
@@ -156,32 +125,8 @@
   }
 }
 
-@keyframes pulse-glow {
-  0%,
-  100% {
-    opacity: 1;
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-  }
-  50% {
-    opacity: 0.8;
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
-  }
-}
-
 .animate-fade-in-up {
   animation: fade-in-up 0.6s ease-out;
-}
-
-.animate-float {
-  animation: float 8s ease-in-out infinite;
-}
-
-.animate-float-delayed {
-  animation: float-delayed 10s ease-in-out infinite;
-}
-
-.animate-float-slow {
-  animation: float-slow 12s ease-in-out infinite;
 }
 
 .animate-progress {
@@ -192,10 +137,6 @@
   animation: shake 0.5s ease-in-out;
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
 /* Utility classes */
 .font-display {
   font-family: var(--font-display);
@@ -203,33 +144,6 @@
 
 .font-body {
   font-family: var(--font-body);
-}
-
-/* Gradient text */
-.gradient-text {
-  @apply bg-gradient-to-r from-violet-200 via-fuchsia-200 to-cyan-200 bg-clip-text text-transparent;
-}
-
-/* Glass morphism */
-.glass {
-  @apply backdrop-blur-xl bg-white/5 border border-white/10;
-}
-
-.glass-strong {
-  @apply backdrop-blur-2xl bg-white/10 border border-white/20;
-}
-
-/* Custom shadows */
-.shadow-violet {
-  box-shadow: 0 10px 40px -10px rgba(139, 92, 246, 0.3);
-}
-
-.shadow-fuchsia {
-  box-shadow: 0 10px 40px -10px rgba(217, 70, 239, 0.3);
-}
-
-.shadow-cyan {
-  box-shadow: 0 10px 40px -10px rgba(34, 211, 238, 0.3);
 }
 
 .container {

@@ -8,7 +8,6 @@ import {
   FileText,
   Lightbulb,
   Target,
-  TrendingUp,
 } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
@@ -38,33 +37,10 @@ export function ResumeResults({
       : 0;
 
   const getScoreColor = (score: number) => {
-    if (score >= 80)
-      return {
-        text: "text-emerald-400",
-        bg: "bg-emerald-500/20",
-        border: "border-emerald-500/30",
-        glow: "shadow-emerald-500/20",
-      };
-    if (score >= 60)
-      return {
-        text: "text-cyan-400",
-        bg: "bg-cyan-500/20",
-        border: "border-cyan-500/30",
-        glow: "shadow-cyan-500/20",
-      };
-    if (score >= 40)
-      return {
-        text: "text-yellow-400",
-        bg: "bg-yellow-500/20",
-        border: "border-yellow-500/30",
-        glow: "shadow-yellow-500/20",
-      };
-    return {
-      text: "text-orange-400",
-      bg: "bg-orange-500/20",
-      border: "border-orange-500/30",
-      glow: "shadow-orange-500/20",
-    };
+    if (score >= 80) return "text-white";
+    if (score >= 60) return "text-[#e5e5e5]";
+    if (score >= 40) return "text-[#b0b0b0]";
+    return "text-[#909090]";
   };
 
   const getScoreLabel = (score: number) => {
@@ -74,87 +50,85 @@ export function ResumeResults({
     return t("scoreLabels.needsWork");
   };
 
-  const avgColors = getScoreColor(averageScore);
-
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
+      {/* Back Button */}
       <motion.button
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.1 }}
         onClick={onNewAnalysis}
         disabled={isTransitioning}
-        className="group flex items-center gap-2 text-sm font-medium text-violet-200/70 transition-all hover:text-violet-200 disabled:opacity-50">
+        className="group flex items-center gap-2 text-sm font-medium text-[#7a7a7a] transition-all hover:text-white disabled:opacity-50">
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
         {t("backButton")}
       </motion.button>
+
+      {/* Success Message */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="relative overflow-hidden rounded-2xl border border-violet-500/30 bg-linear-to-r from-violet-950/50 to-fuchsia-950/40 p-6 backdrop-blur-sm">
-        <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-violet-500/20 blur-3xl" />
-        <div className="relative flex items-center gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-violet-500/20">
-            <CheckCircle2 className="h-6 w-6 text-violet-300" />
+        className="relative overflow-hidden rounded-lg border border-[#2a2b2c] bg-[#1e1f20] p-5">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/5">
+            <CheckCircle2 className="h-5 w-5 text-white" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-white">
+            <h3 className="text-base font-semibold text-white">
               {t("successTitle")}
             </h3>
-            <p className="text-sm text-violet-200/70">{t("successMessage")}</p>
+            <p className="text-sm text-[#7a7a7a]">{t("successMessage")}</p>
           </div>
         </div>
       </motion.div>
+
+      {/* Overall Score */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className={`relative overflow-hidden rounded-2xl border ${avgColors.border} bg-linear-to-br from-violet-950/40 to-transparent p-8 backdrop-blur-sm shadow-xl ${avgColors.glow}`}>
-        <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-linear-to-br from-violet-500/10 to-fuchsia-500/10 blur-3xl" />
-        <div className="relative flex flex-col items-center text-center">
-          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-violet-500/20 to-fuchsia-500/20">
-            <Award className="h-8 w-8 text-violet-200" />
+        className="relative overflow-hidden rounded-lg border border-[#2a2b2c] bg-[#1e1f20] p-8">
+        <div className="flex flex-col items-center text-center">
+          <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-lg bg-white/5">
+            <Award className="h-7 w-7 text-white" />
           </div>
-          <h3 className="mb-2 text-sm font-medium uppercase tracking-wider text-violet-200/70">
+          <h3 className="mb-2 text-xs font-medium uppercase tracking-wider text-[#7a7a7a]">
             {t("overallScore")}
           </h3>
-          <div className="mb-2 text-6xl font-bold text-white">
+          <div className="mb-2 text-5xl font-semibold text-white">
             {averageScore}
-            <span className="text-3xl text-violet-200/50">/100</span>
+            <span className="text-2xl text-[#7a7a7a]">/100</span>
           </div>
-          <div
-            className={`inline-flex items-center gap-2 rounded-full ${avgColors.bg} px-4 py-1.5 text-sm font-medium ${avgColors.text}`}>
-            <TrendingUp className="h-4 w-4" />
+          <div className="inline-flex items-center gap-2 rounded-md bg-white/5 px-3 py-1.5 text-sm font-medium text-white">
             {getScoreLabel(averageScore)}
           </div>
         </div>
       </motion.div>
+
+      {/* Detailed Scores */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="relative overflow-hidden rounded-2xl border border-violet-500/20 bg-linear-to-br from-violet-950/40 to-transparent backdrop-blur-sm">
-        <div className="border-b border-violet-500/20 p-6">
+        className="relative overflow-hidden rounded-lg border border-[#2a2b2c] bg-[#1e1f20]">
+        <div className="border-b border-[#2a2b2c] p-5">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-violet-500/20">
-              <Target className="h-5 w-5 text-violet-300" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5">
+              <Target className="h-4 w-4 text-white" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-white">
+              <h3 className="text-base font-semibold text-white">
                 {t("detailedScores")}
               </h3>
-              <p className="text-sm text-violet-200/60">
-                {t("categoryBreakdown")}
-              </p>
+              <p className="text-sm text-[#7a7a7a]">{t("categoryBreakdown")}</p>
             </div>
           </div>
         </div>
-        <div className="p-6">
+        <div className="p-5">
           <div className="space-y-4">
             {scoreEntries.map(([key, value], index) => {
               const score = value as number;
-              const colors = getScoreColor(score);
               const formattedKey = key
                 .replace(/([A-Z])/g, " $1")
                 .replace(/^./, (str) => str.toUpperCase())
@@ -165,34 +139,26 @@ export function ResumeResults({
                   key={key}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 + index * 0.1 }}
-                  className="group">
+                  transition={{ delay: 0.5 + index * 0.08 }}>
                   <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm font-medium text-violet-200">
+                    <span className="text-sm font-medium text-white">
                       {formattedKey}
                     </span>
-                    <span className={`text-sm font-bold ${colors.text}`}>
+                    <span
+                      className={`text-sm font-semibold ${getScoreColor(score)}`}>
                       {score}%
                     </span>
                   </div>
-                  <div className="relative h-2 overflow-hidden rounded-full bg-violet-950/50">
+                  <div className="relative h-1.5 overflow-hidden rounded-full bg-white/5">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${score}%` }}
                       transition={{
-                        delay: 0.6 + index * 0.1,
+                        delay: 0.6 + index * 0.08,
                         duration: 0.8,
                         ease: "easeOut",
                       }}
-                      className={`h-full rounded-full bg-linear-to-r ${
-                        score >= 80
-                          ? "from-emerald-500 to-emerald-400"
-                          : score >= 60
-                            ? "from-cyan-500 to-cyan-400"
-                            : score >= 40
-                              ? "from-yellow-500 to-yellow-400"
-                              : "from-orange-500 to-orange-400"
-                      }`}
+                      className="h-full rounded-full bg-white"
                     />
                   </div>
                 </motion.div>
@@ -201,39 +167,41 @@ export function ResumeResults({
           </div>
         </div>
       </motion.div>
+
+      {/* Suggestions */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
-        className="relative overflow-hidden rounded-2xl border border-fuchsia-500/20 bg-linear-to-br from-fuchsia-950/40 to-transparent backdrop-blur-sm">
-        <div className="border-b border-fuchsia-500/20 p-6">
+        className="relative overflow-hidden rounded-lg border border-[#2a2b2c] bg-[#1e1f20]">
+        <div className="border-b border-[#2a2b2c] p-5">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-fuchsia-500/20">
-              <Lightbulb className="h-5 w-5 text-fuchsia-300" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5">
+              <Lightbulb className="h-4 w-4 text-white" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-white">
+              <h3 className="text-base font-semibold text-white">
                 {t("improvementSuggestions")}
               </h3>
-              <p className="text-sm text-violet-200/60">
+              <p className="text-sm text-[#7a7a7a]">
                 {suggestions.length} {t("actionableTips")}
               </p>
             </div>
           </div>
         </div>
-        <div className="p-6">
+        <div className="p-5">
           <div className="space-y-3">
             {suggestions.map((suggestion: string, index: number) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.7 + index * 0.1 }}
-                className="group flex gap-3 rounded-xl border border-fuchsia-500/10 bg-fuchsia-950/20 p-4 transition-all hover:border-fuchsia-500/30 hover:bg-fuchsia-950/30">
-                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-fuchsia-500/20 text-fuchsia-300">
-                  <AlertCircle className="h-4 w-4" />
+                transition={{ delay: 0.7 + index * 0.08 }}
+                className="flex gap-3 rounded-lg border border-[#2a2b2c] bg-black/20 p-4 transition-all hover:border-[#3a3b3c]">
+                <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/5 text-white">
+                  <AlertCircle className="h-3 w-3" />
                 </div>
-                <p className="text-sm leading-relaxed text-violet-100">
+                <p className="text-sm leading-relaxed text-[#e5e5e5]">
                   {suggestion}
                 </p>
               </motion.div>
@@ -241,18 +209,19 @@ export function ResumeResults({
           </div>
         </div>
       </motion.div>
+
+      {/* Analyze Another Button */}
       <motion.button
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }}
         onClick={onNewAnalysis}
         disabled={isTransitioning}
-        className="group relative w-full overflow-hidden rounded-xl border border-violet-500/30 bg-linear-to-r from-violet-600 to-fuchsia-600 py-4 font-semibold text-white shadow-lg shadow-violet-500/25 transition-all hover:shadow-xl hover:shadow-violet-500/40 disabled:opacity-50">
-        <span className="relative z-10 flex items-center justify-center gap-2">
-          <FileText className="h-5 w-5" />
+        className="group relative w-full overflow-hidden rounded-lg border border-[#2a2b2c] bg-white py-3.5 font-medium text-black transition-all hover:bg-white/90 disabled:opacity-50">
+        <span className="flex items-center justify-center gap-2">
+          <FileText className="h-4 w-4" />
           {t("analyzeAnother")}
         </span>
-        <div className="absolute inset-0 bg-linear-to-r from-fuchsia-600 to-violet-600 opacity-0 transition-opacity group-hover:opacity-100" />
       </motion.button>
     </div>
   );
